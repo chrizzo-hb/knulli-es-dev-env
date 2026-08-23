@@ -18,6 +18,7 @@ xgettext --default-domain=emulationstation2 \
          --keyword=N_ \
          --from-code=UTF-8 \
          --add-comments=TRANSLATORS \
+         --no-location \
          --output="$POT_FILE" \
          $(find . -name "*.cpp" -o -name "*.h")
 
@@ -27,7 +28,9 @@ cd "$LOCALE_DIR/lang"
 for p in */LC_MESSAGES/emulationstation2.po; do
     if [ -f "$p" ]; then
         echo "   -> Merging: $p"
-        msgmerge --update --backup=none "$p" "../emulationstation2.pot"
+		msgmerge --update --backup=none "$p" "../emulationstation2.pot"
+		echo "   -> Removing obsolete translations from: $p"
+		msgattrib --no-obsolete -o "$p" "$p"
     fi
 done
 
