@@ -8,7 +8,7 @@ apply_git_settings() {
     git config push.autoSetupRemote true
 }
 
-echo "Installing essential system dependencies..."
+echo "Installing essential build dependencies..."
 sudo apt update && sudo apt install -y build-essential gettext rsync
 
 mkdir -p "$BASE_DIR"
